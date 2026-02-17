@@ -1,6 +1,6 @@
 # Requirements – Starter Template
 
-**Project Name:** Your App Name \
+**Project Name:** CleanSweep
 **Team:** Names and roles \
 **Course:** CSC 340\
 **Version:** 1.0\
