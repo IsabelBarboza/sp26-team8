@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+CSC340
+Website of CleanSweep.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CleanSweep</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+        <nav>
+                 <a href="index.html">Home</a><br>   
+                <a href="providers.html">Providers</a><br>
+                <a href="confirmation.html">Confirmation</a><br>
+        
+        </nav>
+        <section class="form">
+            <h1> Booking</h1>
+            <p>Schedule your cleaning service with ease.</p>
+            <p>Choose from a variety of cleaning services, select a date and time that works for you, and let our trusted professionals take care of the rest.</p>
+            
+            <form id="bookingForm" class="booking-form" action="confirmation.html">
+                 <label for="date">Date:</label><br>
+                <input type="date" id="date" name="date"><br><br>
+
+                 <label for="duration">How long do you need the service?:</label><br>
+                <input type="text" id="address" name="address" placeholder="Enter number in hours"><br><br>
+
+                <label for="time">Time:</label><br>
+                <input type="time" id="time" name="time"><br><br>
+
+                <label for="address">Address:</label><br>
+                <input type="text" id="address" name="address" placeholder="123 Main St"><br><br>
+
+                <label for="specialInstructions">Special Instructions:</label><br>
+                <textarea id="specialInstructions" name="specialInstructions"></textarea><br><br>
+                    
+
+                <button type="submit">Confirm</button>
+                
+
+            </form>
+        </section>
+            <footer>
+                <p>High-fidelity prototype created for educational use in the CSC340 course.</p>
+            </footer>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+CSC340
+Website of CleanSweep.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CleanSweep</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+        <nav>   
+                <a href="index.html">Home</a><br>  
+                <a href="providers.html">Providers</a><br>
+                
+        </nav>
+
+            <h1>Search Cleaning Service</h1>
+            <p>Find the perfect cleaning service for your needs.</p>
+	         <input type="text" id="search" placeholder="Search cleaning service...">
+              
+          <form action="providers.html">
+
+              <select name="Availability">
+                <option value="">Availability</option>
+                <option>Mon-Sun, 8am-6pm</option>
+                <option>Mon-Fri, 9am-5pm</option>
+                <option>Mon-Sat, 9am-7pm</option>
+              </select>
+
+              <select name="location">
+                <option value="">Location</option>
+                <option>New York, NY</option>
+                <option>Los Angeles, CA</option>
+                <option>Chicago, IL</option>
+              </select>  
+
+              <select name="Price">
+                <option value="">Price Range</option>
+                <option>$50 - $100</option>
+                <option>$60 - $120</option>
+                <option>$70 - $140+</option>
+              </select>
+
+                <button type="submit">Search</button>
+
+             </form>
+           <hr>  
+             <p>Service type: Home Cleaning, Office Cleaning, Carpet Cleaning, etc.</p>
+             <p>Location: Enter your city or zip code to find local providers.</p>
+             <p>Availability: Check provider schedules to book at your convenience.</p>
+             <p>Ratings and Reviews: Read feedback from other customers to make informed decisions.</p>
+
+            <footer>
+                <p>High-fidelity prototype created for educational use in the CSC340 course.</p>
+            </footer>
+  </body>
+</html>

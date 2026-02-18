@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+CSC340
+Website of CleanSweep.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CleanSweep</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer> </script>
+</head>
+
+<body>
+        <nav>
+                 <a href="index.html">Home</a><br>  
+                <a href="confirmation.html">Confirmation</a><br>
+                
+        </nav>
+
+            <h1>Submit a Review</h1>
+
+            <p>We value your feedback! Please take a moment to share your experience with our cleaning service.</p>
+           
+          <form id="reviewForm"> 
+            <label for="rating"></label>Rating (1.0 - 5.0):</label><br>
+            <input type="text" id="rating" name="rating"><br><br>
+            <label for="comments">Comments:</label><br>
+            <textarea  id="comments" name="comments"></textarea><br><br>
+             
+            <button type="button" onclick="submitReview()">Submit Review</button>
+            
+           </form>
+           
+             <p>Thank you for helping us improve our services!</p>
+       
+       
+       
+     <hr>
+            <h2>Customer Reviews</h2>
+           <p>Read reviews from other customers to make informed decisions about your cleaning service.</p>
+         <blockquote>
+                <p>
+                    <em>
+                        <p>Jhon James: "Excellent service! My house has never been cleaner."</p>
+                        <p>Jane Smith: "Professional and reliable. Highly recommend!"</p>
+                        <p>Emily Johnson: "Great attention to detail and friendly staff."</p>
+                    </em>
+                </p>
+            </blockquote>
+        
+            <footer>
+                <p>High-fidelity prototype created for educational use in the CSC340 course.</p>
+            </footer>   
+        
+</body>
+</html>
