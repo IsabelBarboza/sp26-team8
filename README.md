@@ -15,8 +15,8 @@ The main goal of CleanSweep is to make it simple for customers to book trusted c
 ### Customer (Isabel Barboza):
 1. Create/modify customer profile - Customers can enter their personal information, like name, address, phone number, and cleaning choices through a web form.
 2. View available services - Customers can search services by type, ratings, location and availability.
-3. Subscribe to available services - Customers can schedule single or regular cleaning appointments by choosing a provider and time.
-4. Write reviews for subscribed services - Customers can leave ratings and feedback after completed services.
+3. book to available services - Customers can schedule single or regular cleaning appointments by choosing a provider and time.
+4. Write reviews for bookd services - Customers can leave ratings and feedback after completed services.
 
 ### Provider (the user with the provider role):
 1. Create/modify/remove provider profile - providers can enter and edit their profesional info through a web form 
