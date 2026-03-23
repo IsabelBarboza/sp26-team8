@@ -1,10 +1,22 @@
 package com.sp26.team8.entity;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -12,6 +24,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+
 public class User {
 
   @Id
@@ -48,16 +61,17 @@ public class User {
   protected void onUpdate() {
     updatedAt = LocalDateTime.now();
   }
-}
-
-enum UserStatus {
+  enum UserStatus {
   ACTIVE,
   INACTIVE,
   SUSPENDED
-}
+  }
 
-enum UserRole {
+  enum UserRole {
   CUSTOMER,
   PROVIDER,
   SYSADMIN
+  }
 }
+
+

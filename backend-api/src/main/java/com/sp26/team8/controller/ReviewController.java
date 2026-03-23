@@ -1,5 +1,5 @@
 package com.sp26.team8.controller;
-
+/* 
 import com.sp26.team8.entity.Review;
 import com.sp26.team8.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,3 +58,4 @@ public class ReviewController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
+*/

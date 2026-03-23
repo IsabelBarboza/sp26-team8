@@ -1,13 +1,13 @@
-
 package com.sp26.team8.entity;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @PrimaryKeyJoinColumn(name = "customer_id")
+
 public class Customer extends User {
 
   @Column(nullable = false)
@@ -28,12 +29,12 @@ public class Customer extends User {
     private String address;
 
 
-  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+ /*  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonIgnoreProperties("customer")
   private List<Booking> bookings;
 
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonIgnoreProperties("customer")
-  private List<Review> reviews;
+  private List<Review> reviews;*/
 
 }

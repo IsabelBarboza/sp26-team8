@@ -1,5 +1,6 @@
 
 package com.sp26.team8.entity;
+/* 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,14 +16,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Service {
+public class CleaningService {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long serviceId;
 
   @ManyToOne
-  @JoinColumn(name = "service_id", nullable = false)
+  @JoinColumn(name = "provider_id", nullable = false)
   @JsonIgnoreProperties("services")
   private Provider provider;
 
@@ -32,18 +33,8 @@ public class Service {
   @Column(columnDefinition = "TEXT")
   private String description;
 
-  @Column(nullable = false)
-  @Enumerated(EnumType.STRING)
-  private Season season;
-
-  @Column(columnDefinition = "TEXT")
-  private String details;
-
   @Column(nullable = false, precision = 10, scale = 2)
   private BigDecimal price;
-
-  @Column(nullable = false)
-  private Integer capacity;
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
@@ -71,8 +62,9 @@ public class Service {
   }
 
   public enum ServiceStatus {
-    PUBLISHED, ACTIVE, INACTIVE, ARCHIVED
+     ACTIVE, INACTIVE
   }
 
  
 }
+*/

@@ -1,13 +1,31 @@
 package com.sp26.team8.entity;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+/* 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "bookings")
@@ -28,11 +46,8 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "service_id", nullable = false)
     @JsonIgnoreProperties({ "bookings" })
-    private Service service;
+    private CleaningService  service;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Cadence cadence;
 
     @Column(nullable = false)
     private LocalDate startDate;
@@ -42,7 +57,7 @@ public class Booking {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private bookingstatus status;
+    private BookingStatus status;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -65,17 +80,12 @@ public class Booking {
         updatedAt = LocalDateTime.now();
     }
 
-    public enum bookingstatus {
+    public enum BookingStatus {
         ACTIVE,
-        PAUSED,
         CANCELLED,
         COMPLETED
-    }
+    } 
+ } */
 
-    public enum Cadence {
-        WEEKLY,
-        BIWEEKLY,
-        MONTHLY
-    }
-}
+   
 
