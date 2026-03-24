@@ -15,15 +15,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sp26.team8.entity.Booking;
 import com.sp26.team8.entity.Customer;
+import com.sp26.team8.entity.Review;
+import com.sp26.team8.service.BookingService;
 import com.sp26.team8.service.CustomerService;
+import com.sp26.team8.service.ReviewService;
 
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
-
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private BookingService bookingService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
@@ -37,14 +46,6 @@ public class CustomerController {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @GetMapping("/services")
-        public List<String> getAvailableServices() {
-        return List.of(
-        "House Cleaning",
-        "Deep Cleaning",
-        "Office Cleaning"
-    );
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
@@ -83,15 +84,24 @@ public class CustomerController {
     }
     
 
-    @PostMapping("/{customerId}/subscribe/{serviceName}")
-    public String subscribe(@PathVariable Long customerId, @PathVariable String serviceName) {
-    return "Customer " + customerId + " subscribed to " + serviceName;
+   @PostMapping("/{customerId}/book/{serviceId}")
+    public ResponseEntity<Booking> bookService(
+        @PathVariable Long customerId,
+        @PathVariable Long serviceId) {
+    Booking booking = bookingService.createBooking(customerId, serviceId);
+    return new ResponseEntity<>(booking, HttpStatus.CREATED);
     }
 
-    @PostMapping("/{customerId}/review")
-        public String writeReview(@PathVariable Long customerId, @RequestBody String review) {
-        return "Customer " + customerId + " wrote review: " + review;
-    }
+    @PostMapping("/{customerId}/review/{serviceId}")
+    public ResponseEntity<Review> writeReview(
+        @PathVariable Long customerId,
+        @PathVariable Long serviceId,
+        @RequestBody Review review) {
+    //  review.setCustomerId(customerId);
+    //  review.setBookingId(bookingId);
+    Review savedReview = reviewService.createReview( customerId, serviceId, review.getComment(), review.getRating());
+    return new ResponseEntity<>(savedReview, HttpStatus.CREATED);
 
     
+}
 }

@@ -1,4 +1,32 @@
 package com.sp26.team8.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sp26.team8.entity.CleaningService;
+import com.sp26.team8.repository.CleaningServiceRepository;
+
+@Service
+public class CleaningServiceService {
+
+    @Autowired
+    private CleaningServiceRepository repository;
+
+    public List<CleaningService> findAll() {
+        return repository.findAll();
+    }
+
+    public CleaningService findById(Long id) {
+    return repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Service not found"));
+    }
+
+    public CleaningService save(CleaningService service) {
+        return repository.save(service);
+    }
+}
 /* 
 import java.math.BigDecimal;
 import java.util.List;
@@ -68,11 +96,6 @@ public class ServiceService {
     }
 
 
-    public List<CleaningService> filterServices(ServiceStatus status, BigDecimal maxPrice) {
-      return serviceRepository.findAll().stream()
-                .filter(s -> status == null || s.getStatus() == status)
-                .filter(s -> maxPrice == null || s.getPrice().compareTo(maxPrice) <= 0)
-                .collect(Collectors.toList());
-    }
+   
 }
 */

@@ -1,5 +1,37 @@
 package com.sp26.team8.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sp26.team8.entity.Booking;
+import com.sp26.team8.service.BookingService;
+
+@RestController
+@RequestMapping("/api/bookings")
+public class BookingController {
+
+    @Autowired
+    private BookingService bookingService;
+
+    
+
+    @PostMapping("/{customerId}/{serviceId}")
+    public Booking createBooking(@PathVariable Long customerId,
+                                 @PathVariable Long serviceId) {
+        return bookingService.createBooking(customerId, serviceId);
+    }
+
+    @GetMapping
+    public List<Booking> getAllBookings() {
+        return bookingService.getAllBookings();
+    }
+}
 /* 
 import com.sp26.team8.entity.Booking;
 import com.sp26.team8.entity.Booking.BookingStatus;
