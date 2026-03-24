@@ -1,12 +1,16 @@
-
 package com.sp26.team8.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.sp26.team8.entity.Booking;
+
+public interface BookingRepository extends JpaRepository<Booking, Long> {}
 /*
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import com.sp26.team8.entity.Booking;
 import com.sp26.team8.entity.Booking.BookingStatus;
 

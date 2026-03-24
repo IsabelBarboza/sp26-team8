@@ -1,4 +1,56 @@
 package com.sp26.team8.service;
+
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sp26.team8.entity.Booking;
+import com.sp26.team8.entity.CleaningService;
+import com.sp26.team8.entity.Customer;
+import com.sp26.team8.repository.BookingRepository;
+import com.sp26.team8.repository.CleaningServiceRepository;
+import com.sp26.team8.repository.CustomerRepository;
+
+@Service
+public class BookingService {
+
+    @Autowired
+    private BookingRepository bookingRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private CleaningServiceRepository serviceRepository;
+
+ 
+    public Booking createBooking(Long customerId, Long serviceId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        CleaningService service = serviceRepository.findById(serviceId)
+                .orElseThrow(() -> new RuntimeException("Service not found"));
+
+        Booking booking = new Booking();
+        booking.setCustomer(customer);
+        booking.setService(service);
+        booking.setStatus("ACTIVE");
+        booking.setStartDate(LocalDateTime.now());
+        booking.setEndDate(LocalDateTime.now().plusDays(1));
+        booking.setCreatedAt(LocalDateTime.now());
+        booking.setUpdatedAt(LocalDateTime.now());
+
+        return bookingRepository.save(booking);
+    }
+
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
+    }
+
+}
 /* 
 import com.sp26.team8.entity.Booking;
 import com.sp26.team8.entity.Booking.BookingStatus;

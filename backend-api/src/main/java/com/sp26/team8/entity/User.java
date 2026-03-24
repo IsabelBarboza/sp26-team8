@@ -70,7 +70,7 @@ public class User {
   enum UserRole {
   CUSTOMER,
   PROVIDER,
-  SYSADMIN
+ 
   }
 }
 

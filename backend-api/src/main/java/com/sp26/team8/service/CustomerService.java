@@ -9,11 +9,14 @@ import org.springframework.stereotype.Service;
 import com.sp26.team8.entity.Customer;
 import com.sp26.team8.repository.CustomerRepository;
 
+import lombok.Data;
+
 @Service 
+@Data
 public class CustomerService {
 
     @Autowired
-    private final CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;

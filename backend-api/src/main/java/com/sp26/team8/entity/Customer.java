@@ -1,14 +1,18 @@
 package com.sp26.team8.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 @Entity
 @Table(name = "customers")
 @Data
@@ -20,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class Customer extends User {
 
   @Column(nullable = false)
-  private String name;
+   private String name;
 
   @Column
     private String phoneNumber;
@@ -28,13 +32,21 @@ public class Customer extends User {
   @Column
     private String address;
 
+@OneToMany(mappedBy = "customer")
+@JsonIgnore
+private List<Review> reviews;
 
- /*  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+@OneToMany(mappedBy = "customer")
+@JsonIgnore
+private List<Booking> bookings;
+
+
+
+}
+/*  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonIgnoreProperties("customer")
   private List<Booking> bookings;
 
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonIgnoreProperties("customer")
   private List<Review> reviews;*/
-
-}
