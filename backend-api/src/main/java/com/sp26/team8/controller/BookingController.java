@@ -1,3 +1,11 @@
+package com.sp26.team8.controller;
+
+/* 
+import com.sp26.team8.entity.Booking;
+import com.sp26.team8.entity.Booking.BookingStatus;
+import com.sp26.team8.service.BookingService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +48,7 @@ public class BookingController {
 
     @GetMapping("/service/{serviceId}")
     public ResponseEntity<List<Booking>> getBookingsByServicesId(@PathVariable Long serviceId) {
-        List<Booking> bookings = bookingService.getBookingsByServicesId(serviceId);
+        List<Booking> bookings = bookingService.getBookingsByServiceId(serviceId);
         return new ResponseEntity<>(bookings, HttpStatus.OK);
     }
 
@@ -66,4 +74,4 @@ public class BookingController {
         bookingService.deleteBooking(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-}
+}*/

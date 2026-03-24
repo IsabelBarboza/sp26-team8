@@ -1,5 +1,5 @@
 package com.sp26.team8.service;
-
+/* 
 import com.sp26.team8.entity.Review;
 import com.sp26.team8.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,7 @@ public class ReviewService {
     
     public Review updateReview(Long id, Review reviewDetails) {
         return reviewRepository.findById(id).map(review -> {
-            review.setCleanlinessRating(reviewDetails.getCleanlinessRating());
-            review.setQualityRating(reviewDetails.getQualityRating());
-            review.setPunctualityRating(reviewDetails.getPunctualityRating());
+            review.setRating(reviewDetails.getRating());
             review.setComment(reviewDetails.getComment());
             review.setReplyText(reviewDetails.getReplyText());
             return reviewRepository.save(review);
@@ -45,3 +43,4 @@ public class ReviewService {
         reviewRepository.deleteById(id);
     }
 }
+*/

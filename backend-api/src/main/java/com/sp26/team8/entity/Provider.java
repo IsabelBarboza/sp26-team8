@@ -1,11 +1,12 @@
 package com.sp26.team8.entity;
+/* 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import java.util.List;
 
 @Entity
 @Table(name = "providers")
@@ -20,8 +21,8 @@ public class Provider extends User {
     @Column(columnDefinition = "TEXT")
     private String bio;
 
-    @OneToOne(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("provider")
-    private Provider Provider;
+    private List<CleaningService> services;
 }
-
+*/

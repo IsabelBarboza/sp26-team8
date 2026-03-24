@@ -1,0 +1,13 @@
+{
+    "java.maven.downloadSources": true,
+    "java.configuration.annotationProcessing.enabled": true,
+    "maven.pomfile.autoUpdateEffectivePOM": true,
+    "java.compile.nullAnalysis.mode": "automatic",
+    
+    "java.import.gradle.enabled": false,
+    "java.import.maven.enabled": true,
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.referencesCodeLens.enabled": false,
+    "java.signatureHelp.enabled": false
+
+}

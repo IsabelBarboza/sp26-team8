@@ -1,12 +1,16 @@
 
 package com.sp26.team8.entity;
+
+/* 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.time.LocalDateTime;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Entity
 @Table(name = "reviews")
@@ -23,15 +27,14 @@ public class Review {
     @JoinColumn(name = "booking_id", nullable = false)
      @JsonIgnoreProperties("reviews")
     private Booking booking;
+    
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
 
     @Column(nullable = false)
-    private Integer cleanlinessRating;
-
-    @Column(nullable = false)
-    private Integer punctualityRating  ;
-
-    @Column(nullable = false)
-    private Integer qualityRating;
+    private Integer rating  ;
 
     @Column(columnDefinition = "TEXT")
     private String comment;
@@ -54,5 +57,6 @@ public class Review {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
-    }
-}
+    }} */
+
+    

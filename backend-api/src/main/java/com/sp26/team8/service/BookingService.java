@@ -1,5 +1,5 @@
 package com.sp26.team8.service;
-
+/* 
 import com.sp26.team8.entity.Booking;
 import com.sp26.team8.entity.Booking.BookingStatus;
 import com.sp26.team8.repository.BookingRepository;
@@ -28,11 +28,11 @@ public class BookingService {
     }
 
     public List<Booking> getBookingsByCustomerId(Long customerId) {
-        return bookingRepository.findByCustomerId(customerId);
+        return bookingRepository.findByCustomer_Id(customerId);
     }
 
     public List<Booking> getBookingsByServiceId(Long serviceId) {
-        return bookingRepository.findByServiceId(serviceId);
+        return bookingRepository.findByService_Id(serviceId);
     }
 
     public List<Booking> getBookingsByStatus(BookingStatus status) {
@@ -41,10 +41,7 @@ public class BookingService {
 
     public Booking updateBooking(Long id, Booking bookingDetails) {
         return bookingRepository.findById(id).map(booking -> {
-            booking.setCustomer(bookingDetails.getCustomer());
-            booking.setService(bookingDetails.getService());
             booking.setStatus(bookingDetails.getStatus());
-            booking.setBookingDate(bookingDetails.getBookingDate());
             return bookingRepository.save(booking);
         }).orElseThrow(() -> new RuntimeException("Booking not found"));
     }
@@ -53,3 +50,4 @@ public class BookingService {
         bookingRepository.deleteById(id);
     }
 }
+*/
