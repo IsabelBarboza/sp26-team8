@@ -40,8 +40,7 @@ public class BookingService {
         booking.setStatus("ACTIVE");
         booking.setStartDate(LocalDateTime.now());
         booking.setEndDate(LocalDateTime.now().plusDays(1));
-        booking.setCreatedAt(LocalDateTime.now());
-        booking.setUpdatedAt(LocalDateTime.now());
+       
 
         return bookingRepository.save(booking);
     }
