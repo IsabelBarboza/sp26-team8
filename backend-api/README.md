@@ -14,14 +14,8 @@
 4. [API Endpoints](#4-api-endpoints)
    - [Customer Management](#customer-management)
    - [Provider Management](#provider-management)
-   - [Provider Management](#provider-management)
-   - [Service Management](#service-management)
-   - [Bookings Management](#bookings-management)
-   - [Review Management](#review-management)
-   - [System Admin Management](#system-admin-management)
-   - [Audit Logs](#audit-logs)
+  
 5. [Use Case Mapping](#5-use-case-mapping)
-
 ---
 ## 1. Overview
 The LocalHarvest Hub Backend API provides a RESTful interface for managing: 
@@ -31,8 +25,6 @@ The LocalHarvest Hub Backend API provides a RESTful interface for managing:
 - **Services**: Seasonal produce offerings with pricing and capacity management
 - **Bookingss**: Customer bookings to services with various cadences
 - **Reviews**: Customer feedback on freshness and delivery experiences
-- **Audit Logs**: Administrative tracking of system actions
-
 ---
 ## 2. User Roles
 The API supports three primary user roles:
@@ -41,23 +33,21 @@ The API supports three primary user roles:
 |------|-------------|-------------------------|
 | **CUSTOMER** | Consumer of services | Browse provider/service, book, write reviews |
 | **PROVIDER** | Provider of services | Create/manage service, view metrics, reply to reviews |
-| **SYS_ADMIN** | Platform administrator | Manage access, moderate content, view analytics |
-
 ---
 ## 3. UML Class Diagram
-![UML Class Diagram](../docs/uml-class.png)
+![UML Class Diagram](../docs/umlPROJECT.jpeg)
 
 ## 4. API Endpoints
-**Note:** Users are created through role-specific endpoints (`/customers`, `/providers`, `/sysadmins`), not through a generic `/users` endpoint. This ensures proper role assignment and role-specific attributes.
+**Note:** Users are created through role-specific endpoints (`/customers`, `/providers`), not through a generic `/users` endpoint. This ensures proper role assignment and role-specific attributes.
 
 ### Customer Management
 #### Create Customer
-**Endpoint:** `POST /customers`
+**Endpoint:** `POST /api/customers`
 **Use Case:** US-CUST-001 (Register as Customer)
 **Description:** Create a new customer account with profile information.
 
 ```http
-POST /customers
+POST /api/customers
 Content-Type: application/json
 
 {
@@ -68,9 +58,7 @@ Content-Type: application/json
   "name": "Jane Doe"
 }
 ```
-
 **Response:**
-```json
 {
   "userId": 1,
   "email": "jane@example.com",
@@ -81,84 +69,288 @@ Content-Type: application/json
   "createdAt": "2026-01-15T10:30:00",
   "updatedAt": "2026-01-15T10:30:00"
 }
-```
 
-**Status Code:** `201 Created`
-
----
 
 #### Get All Customers
-**Endpoint:** `GET /customers`
+**Endpoint:** `GET /api/customers`
 **Use Case:** Admin user management
 **Description:** Retrieve all customer accounts.
 
-```http
-GET /customers
-```
-
-**Status Code:** `200 OK`
+	{
+		"name": "Rous Doe",
+		"phoneNumber": "8723425652",
+		"address": "1234 Table Rd",
+		"createdAt": "2026-03-23T12:49:13.393696",
+		"email": "jane@example.com",
+		"passwordHash": "hashed_password",
+		"role": "CUSTOMER",
+		"status": "ACTIVE",
+		"updatedAt": "2026-03-23T13:52:30.974126",
+		"userId": 1
+	},
+	{
+		"name": "John Smith",
+		"phoneNumber": null,
+		"address": null,
+		"createdAt": "2026-03-23T17:53:27.238741",
+		"email": "john@example.com",
+		"passwordHash": "hashed_password",
+		"role": "CUSTOMER",
+		"status": "ACTIVE",
+		"updatedAt": "2026-03-23T17:53:27.238741",
+		"userId": 2
+	}
 
 ---
-
 #### Get Customer by ID
-**Endpoint:** `GET /customers/{id}`
+**Endpoint:** `GET /api/customers/{id}`
 **Use Case:** Customer profile view
 **Description:** Retrieve specific customer by ID.
 
-```http
-GET /customers/1
 ```
-
-**Status Code:** `200 OK` or `404 Not Found`
+GET /api/customers/1
+```
+{
+	"name": "Rous Doe",
+	"phoneNumber": "8723425652",
+	"address": "1234 Table Rd",
+	"createdAt": "2026-03-23T12:49:13.393696",
+	"email": "jane@example.com",
+	"passwordHash": "hashed_password",
+	"role": "CUSTOMER",
+	"status": "ACTIVE",
+	"updatedAt": "2026-03-23T13:52:30.974126",
+	"userId": 1
+}
 
 ---
-
-#### Get Customer by Email
-**Endpoint:** `GET /customers/email/{email}`
-**Use Case:** Customer lookup
-**Description:** Retrieve customer by email address.
+ #### Get All services
+**Endpoint:** `GET /services`
+**Use Case:** US-CUST-003 (Discover services)
+**Description:** Retrieve all available services.
 
 ```http
-GET /customers/email/jane@example.com HTTP/1.1
+GET /services
 ```
+	{
+		"serviceId": 7,
+		"provider": {
+			"name": "Demo Provider",
+			"phoneNumber": "555-1234",
+			"address": "123 Demo Street",
+			"createdAt": "2026-03-23T21:01:15.983124",
+			"email": "demo@example.com",
+			"passwordHash": "hashed_password",
+			"role": "PROVIDER",
+			"status": "ACTIVE",
+			"updatedAt": "2026-03-23T21:01:15.983124",
+			"userId": 3
+		},
+		"title": "House Cleaning",
+		"description": "Basic House Cleaning",
+		"price": 50,
+		"status": "ACTIVE"
+	}
+---
 
-**Status Code:** `200 OK` or `404 Not Found`
+#### Get All services
+**Endpoint:** `GET api/services/{serviceId}`
+**Use Case:** US-CUST-003 (Discover services)
+**Description:** Retrieve all available services by ID.
 
+`
+```http
+GET api/services/8
+****
+```
+{
+	"serviceId": 8,
+	"provider": {
+		"name": "Demo Provider",
+		"phoneNumber": "555-1234",
+		"address": "123 Demo Street",
+		"createdAt": "2026-03-23T21:01:15.983124",
+		"email": "demo@example.com",
+		"passwordHash": "hashed_password",
+		"role": "PROVIDER",
+		"status": "ACTIVE",
+		"updatedAt": "2026-03-23T21:01:15.983124",
+		"userId": 3
+	},
+	"title": "Office Cleaning",
+	"description": "Deep Office Cleaning",
+	"price": 120,
+	"status": "ACTIVE"
+}
+---
 ---
 
 #### Update Customer
-**Endpoint:** `PUT /customers/{id}`
+**Endpoint:** `PUT api/customers/{id}`
 **Use Case:** US-CUST-001 (Update Profile)
 **Description:** Update customer profile information.
 
 ```http
-PUT /customers/1
+PUT api/customers/4
 Content-Type: application/json
 
 {
-  "name": "Jane Smith",
-  "status": "ACTIVE"
+  "email": "Milyy@example.com",
+  "passwordHash": "hashed_password",
+  "status": "ACTIVE",
+  "role": "CUSTOMER",
+  "name": "Miley Keith"
 }
 ```
-
-**Response:** Updated customer object
-
-**Status Code:** `200 OK` or `404 Not Found`
-
+**Response:** {
+ "name": "Miley Keith",
+	"phoneNumber": null,
+	"address": null,
+	"createdAt": "2026-03-24T13:26:37.684967",
+	"email": "Milyy@example.com",
+	"passwordHash": "hashed_password",
+	"role": "CUSTOMER",
+	"status": "ACTIVE",
+	"updatedAt": "2026-03-24T22:50:25.7121041",
+	"userId": 4
+}
 ---
 
 #### Delete Customer
-**Endpoint:** `DELETE /customers/{id}`
+**Endpoint:** `DELETE api/customers/{id}`
 **Use Case:** Account deletion
 **Description:** Delete customer account.
 
 ```http
-DELETE /customers/1
+DELETE api/customers/8
 ```
 
 **Status Code:** `204 No Content` or `404 Not Found`
+[]
+---
+#### Booking a Service
+**Endpoint:** `BOOK api/customers/{id}/book/{service_id}`
+**Use Case:** Book a service
+**Description:** Booking a service.
+
+```http
+BOOK api/customers/4/book/9
+```
+`{
+	"serviceId": 8,
+	"provider": {
+		"name": "Demo Provider",
+		"phoneNumber": "555-1234",
+		"address": "123 Demo Street",
+		"createdAt": "2026-03-23T21:01:15.983124",
+		"email": "demo@example.com",
+		"passwordHash": "hashed_password",
+		"role": "PROVIDER",
+		"status": "ACTIVE",
+		"updatedAt": "2026-03-23T21:01:15.983124",
+		"userId": 3
+	},
+	"title": "Office Cleaning",
+	"description": "Deep Office Cleaning",
+	"price": 120,
+	"status": "ACTIVE"
+}
 
 ---
+#### Review a service
+**Endpoint:** `REVIEW api/customers/{id}/review/{book_id}`
+**Use Case:** Leave a review to a service.
+**Description:** Review a service.
+
+```http
+REVIEW api/customers/2/review/6
+```
+
+
+	"reviewId": 10,
+	"customer": {
+		"name": "John Smith",
+		"phoneNumber": null,
+		"address": null,
+		"createdAt": "2026-03-23T17:53:27.238741",
+		"email": "john@example.com",
+		"passwordHash": "hashed_password",
+		"role": "CUSTOMER",
+		"status": "ACTIVE",
+		"updatedAt": "2026-03-23T17:53:27.238741",
+		"userId": 2
+	},
+	"service": {
+		"serviceId": 9,
+		"provider": {
+			"name": "Demo Provider",
+			"phoneNumber": "555-1234",
+			"address": "123 Demo Street",
+			"createdAt": "2026-03-23T21:01:15.983124",
+			"email": "demo@example.com",
+			"passwordHash": "hashed_password",
+			"role": "PROVIDER",
+			"status": "ACTIVE",
+			"updatedAt": "2026-03-23T21:01:15.983124",
+			"userId": 3
+		},
+		"title": "Window Cleaning",
+		"description": "Window Cleaning",
+		"price": 80,
+		"status": "ACTIVE"
+	},
+	"booking": {
+		"bookingId": 6,
+		"customer": {
+			"name": "John Smith",
+			"phoneNumber": null,
+			"address": null,
+			"createdAt": "2026-03-23T17:53:27.238741",
+			"email": "john@example.com",
+			"passwordHash": "hashed_password",
+			"role": "CUSTOMER",
+			"status": "ACTIVE",
+			"updatedAt": "2026-03-23T17:53:27.238741",
+			"userId": 2
+		},
+		"service": {
+			"serviceId": 9,
+			"provider": {
+				"name": "Demo Provider",
+				"phoneNumber": "555-1234",
+				"address": "123 Demo Street",
+				"createdAt": "2026-03-23T21:01:15.983124",
+				"email": "demo@example.com",
+				"passwordHash": "hashed_password",
+				"role": "PROVIDER",
+				"status": "ACTIVE",
+				"updatedAt": "2026-03-23T21:01:15.983124",
+				"userId": 3
+			},
+			"title": "Window Cleaning",
+			"description": "Window Cleaning",
+			"price": 80,
+			"status": "ACTIVE"
+		},
+		"status": "ACTIVE",
+		"startDate": "2026-03-24T00:00:00",
+		"endDate": "2026-03-25T00:00:00",
+		"createdAt": "2026-03-24T00:32:45.119218",
+		"updatedAt": "2026-03-24T00:32:45.119218"
+	},
+	"comment": "Good service.",
+	"rating": 5,
+	"createdAt": "2026-03-24T22:27:55.6887657",
+	"updatedAt": "2026-03-24T22:27:55.6887657"
+
+---
+
+
+-----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+
+
 ### Provider/Provider Management
 
 #### Create Provider
@@ -842,259 +1034,9 @@ DELETE /reviews/201
 **Status Code:** `204 No Content` or `404 Not Found`
 
 ---
-### System Admin Management
 
-#### Create SysAdmin
-**Endpoint:** `POST /sysadmins`
-**Use Case:** Admin account creation
-**Description:** Create a new system administrator account.
 
-```http
-POST /sysadmins
-Content-Type: application/json
 
-{
-  "email": "admin@example.com",
-  "passwordHash": "hashed_password",
-  "status": "ACTIVE",
-  "role": "SYS_ADMIN",
-  "name": "Alice Administrator"
-}
-```
-
-**Response:**
-```json
-{
-  "userId": 3,
-  "email": "admin@example.com",
-  "status": "ACTIVE",
-  "role": "SYS_ADMIN",
-  "name": "Alice Administrator",
-  "createdAt": "2026-01-15T10:30:00",
-  "updatedAt": "2026-01-15T10:30:00"
-}
-```
-
-**Status Code:** `201 Created`
-
----
-
-#### Get All SysAdmins
-**Endpoint:** `GET /sysadmins`
-**Use Case:** Admin management
-**Description:** Retrieve all system administrators.
-
-```http
-GET /sysadmins
-```
-
-**Status Code:** `200 OK`
-
----
-
-#### Get SysAdmin by ID
-**Endpoint:** `GET /sysadmins/{id}`
-**Use Case:** Admin profile view
-**Description:** Retrieve specific administrator.
-
-```http
-GET /sysadmins/3
-```
-
-**Status Code:** `200 OK` or `404 Not Found`
-
----
-
-#### Get SysAdmin by Email
-**Endpoint:** `GET /sysadmins/email/{email}`
-**Use Case:** Admin lookup
-**Description:** Retrieve administrator by email.
-
-```http
-GET /sysadmins/email/admin@example.com HTTP/1.1
-```
-
-**Status Code:** `200 OK` or `404 Not Found`
-
----
-
-#### Update SysAdmin
-**Endpoint:** `PUT /sysadmins/{id}`
-**Use Case:** Admin profile management
-**Description:** Update administrator information.
-
-```http
-PUT /sysadmins/3
-Content-Type: application/json
-
-{
-  "status": "ACTIVE",
-  "name": "Alice A. Administrator"
-}
-```
-
-**Response:** Updated SysAdmin object
-
-**Status Code:** `200 OK` or `404 Not Found`
-
----
-
-#### Delete SysAdmin
-**Endpoint:** `DELETE /sysadmins/{id}`
-**Use Case:** Admin removal
-**Description:** Delete administrator account.
-
-```http
-DELETE /sysadmins/3
-```
-
-**Status Code:** `204 No Content` or `404 Not Found`
-
----
-
-### Audit Logs
-
-#### Create Audit Log
-**Endpoint:** `POST /audit-logs`
-**Use Case:** US-ADMIN-001, US-ADMIN-002, US-ADMIN-003 (Log Administrative Actions)
-**Description:** Create an audit log entry (typically done automatically by the system).
-
-```http
-POST /audit-logs
-Content-Type: application/json
-
-{
-  "admin": {
-    "userId": 3
-  },
-  "action": "SUSPENDED_USER",
-  "entityType": "USER",
-  "entityId": 1,
-  "reason": "Policy violation",
-  "details": "User violated content guidelines. Multiple complaints received."
-}
-```
-
-**Response:**
-```json
-{
-  "logId": 301,
-  "admin": {
-    "userId": 3,
-    "email": "admin@example.com"
-  },
-  "action": "SUSPENDED_USER",
-  "entityType": "USER",
-  "entityId": 1,
-  "reason": "Policy violation",
-  "details": "User violated content guidelines. Multiple complaints received.",
-  "createdAt": "2026-01-25T10:30:00"
-}
-```
-
-**Common Action Types:**
-- `CREATED_USER`: User account created
-- `SUSPENDED_USER`: User account suspended
-- `BANNED_USER`: User account banned
-- `APPROVED_BOX`: Service approved
-- `REJECTED_BOX`: Service rejected
-- `SUSPENDED_BOX`: Service suspended
-- `APPROVED_REVIEW`: Review approved
-- `MASKED_REVIEW`: Review masked for PII
-- `REMOVED_REVIEW`: Review removed
-
-**Status Code:** `201 Created`
-
----
-
-#### Get All Audit Logs
-**Endpoint:** `GET /audit-logs`
-**Use Case:** US-ADMIN-001, US-ADMIN-004 (View Admin Actions and Analytics)
-**Description:** Retrieve all audit log entries.
-
-```http
-GET /audit-logs
-```
-
-**Status Code:** `200 OK`
-
----
-
-#### Get Audit Log by ID
-**Endpoint:** `GET /audit-logs/{id}`
-**Use Case:** Log detail view
-**Description:** Retrieve specific audit log entry.
-
-```http
-GET /audit-logs/301
-```
-
-**Status Code:** `200 OK` or `404 Not Found`
-
----
-
-#### Get Audit Logs by Admin ID
-**Endpoint:** `GET /audit-logs/admin/{adminId}`
-**Use Case:** US-ADMIN-004 (Track Specific Admin Actions)
-**Description:** Retrieve all audit logs created by a specific administrator.
-
-```http
-GET /audit-logs/admin/3
-```
-
-**Response:** Array of audit logs by the admin
-
-**Status Code:** `200 OK`
-
----
-
-#### Get Audit Logs by Entity Type
-**Endpoint:** `GET /audit-logs/entity-type/{entityType}`
-**Use Case:** US-ADMIN-004 (Track Changes by Entity)
-**Description:** Retrieve audit logs filtered by entity type.
-
-```http
-GET /audit-logs/entity-type/USER
-```
-
-**Response:** Array of audit logs for the entity type
-
-**Status Code:** `200 OK`
-
----
-
-#### Update Audit Log
-**Endpoint:** `PUT /audit-logs/{id}`
-**Use Case:** Log modification (minimal usage)
-**Description:** Update audit log entry.
-
-```http
-PUT /audit-logs/301
-Content-Type: application/json
-
-{
-  "details": "Updated details about the action..."
-}
-```
-
-**Response:** Updated audit log object
-
-**Status Code:** `200 OK` or `404 Not Found`
-
----
-
-#### Delete Audit Log
-**Endpoint:** `DELETE /audit-logs/{id}`
-**Use Case:** Log deletion (restricted, typically only for testing)
-**Description:** Delete audit log entry.
-
-```http
-DELETE /audit-logs/301
-```
-
-**Status Code:** `204 No Content` or `404 Not Found`
-
----
 ## 5. Use Case Mapping
 The API endpoints are designed to support the following SRS use cases:
 
@@ -1123,13 +1065,3 @@ The API endpoints are designed to support the following SRS use cases:
 | **US-FARM-006** | View customer engagement metrics | `GET /bookings/service/{serviceId}` |
 | **US-FARM-007** | Reply to customer reviews | `PUT /reviews/{id}` |
 
-### SysAdmin Use Cases
-
-| Use Case | Description | Related Endpoints |
-|----------|-------------|-------------------|
-| **US-ADMIN-001** | Manage user access (warn/suspend/ban) | `PUT /customers/{id}`, `PUT /providers/{id}`, `PUT /sysadmins/{id}`, `POST /audit-logs` |
-| **US-ADMIN-002** | Moderate product listings | `PUT /service/{id}`, `POST /audit-logs` |
-| **US-ADMIN-003** | Moderate reviews (approve/mask/remove) | `DELETE /reviews/{id}`, `PUT /reviews/{id}`, `POST /audit-logs` |
-| **US-ADMIN-004** | View platform usage & delivery/pickup success | `GET /audit-logs`, `GET /audit-logs/admin/{adminId}`, `GET /audit-logs/entity-type/{entityType}` |
-
----

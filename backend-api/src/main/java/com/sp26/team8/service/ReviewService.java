@@ -31,10 +31,10 @@ public class ReviewService {
         Review review = new Review();
         review.setCustomer(booking.getCustomer());
         review.setService(booking.getService());
+        review.setBooking(booking);
         review.setComment(comment);
         review.setRating(rating);
-        review.setCreatedAt(LocalDateTime.now());
-        review.setUpdatedAt(LocalDateTime.now());
+        
 
         return reviewRepository.save(review);
      }

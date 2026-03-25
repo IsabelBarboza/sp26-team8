@@ -36,6 +36,10 @@ public class Review {
     @JoinColumn(name = "service_id", nullable = false)
     private CleaningService service;
 
+    @ManyToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+    private Booking booking;
+
     @Column(nullable = false)
     private String comment;
 

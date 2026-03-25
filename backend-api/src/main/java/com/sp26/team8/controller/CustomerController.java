@@ -92,16 +92,17 @@ public class CustomerController {
     return new ResponseEntity<>(booking, HttpStatus.CREATED);
     }
 
-    @PostMapping("/{customerId}/review/{serviceId}")
+    @PostMapping("/{customerId}/review/{bookingId}")
     public ResponseEntity<Review> writeReview(
         @PathVariable Long customerId,
-        @PathVariable Long serviceId,
+        @PathVariable Long bookingId,
         @RequestBody Review review) {
-    //  review.setCustomerId(customerId);
-    //  review.setBookingId(bookingId);
-    Review savedReview = reviewService.createReview( customerId, serviceId, review.getComment(), review.getRating());
+    try{ Review savedReview = reviewService.createReview(customerId, bookingId, review.getComment(), review.getRating());
     return new ResponseEntity<>(savedReview, HttpStatus.CREATED);
-
+    }catch(RuntimeException e){
+        System.out.println("Error creating review: " + e.getMessage());
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
     
 }
 }

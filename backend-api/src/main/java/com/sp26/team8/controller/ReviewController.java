@@ -1,46 +1,5 @@
 package com.sp26.team8.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.sp26.team8.entity.Review;
-import com.sp26.team8.service.ReviewService;
-
-@RestController
-@RequestMapping("/api/customers")
-public class ReviewController {
-    
-
-    @Autowired
-    private ReviewService reviewService;
-    @PostMapping("/{customerId}/review/{bookingId}")
-    public ResponseEntity<Review> writeReview(
-            @PathVariable Long customerId,
-            @PathVariable Long bookingId,
-            @RequestBody Review review) {
-    try {
-            Review saved = reviewService.createReview(customerId, bookingId,
-                review.getComment(), review.getRating());
-            return new ResponseEntity<>(saved, HttpStatus.CREATED);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }          
-
-    @GetMapping("/reviews")
-    public List<Review> getAllReviews() {
-        return reviewService.getAllReviews();
-    }
-}
 /* 
 import com.sp26.team8.entity.Review;
 import com.sp26.team8.service.ReviewService;
