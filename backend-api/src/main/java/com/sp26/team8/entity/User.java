@@ -61,13 +61,13 @@ public class User {
   protected void onUpdate() {
     updatedAt = LocalDateTime.now();
   }
-  enum UserStatus {
+  public enum UserStatus {
   ACTIVE,
   INACTIVE,
   SUSPENDED
   }
 
-  enum UserRole {
+  public enum UserRole {
   CUSTOMER,
   PROVIDER,
  

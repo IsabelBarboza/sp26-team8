@@ -43,10 +43,3 @@ private List<Booking> bookings;
 
 
 }
-/*  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-  @JsonIgnoreProperties("customer")
-  private List<Booking> bookings;
-
-  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-  @JsonIgnoreProperties("customer")
-  private List<Review> reviews;*/
