@@ -15,12 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sp26.team8.entity.Booking;
 import com.sp26.team8.entity.Customer;
-import com.sp26.team8.entity.Review;
-import com.sp26.team8.service.BookingService;
 import com.sp26.team8.service.CustomerService;
-import com.sp26.team8.service.ReviewService;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -28,11 +24,6 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @Autowired
-    private BookingService bookingService;
-
-    @Autowired
-    private ReviewService reviewService;
 
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
@@ -57,23 +48,20 @@ public class CustomerController {
     @GetMapping("/email/{email}")
     public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) {
         Customer customer = customerService.getCustomerByEmail(email);
-        return customer != null ? new ResponseEntity<>(customer, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       if (customer == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customerDetails) {
-        Optional<Customer> existing = customerService.getCustomerById(id);
-        if (existing.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
 
-        try {
-            Customer updatedCustomer = customerService.updateCustomer(id, customerDetails);
-            return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
+      try {
+            Customer updated = customerService.updateCustomer(id, customerDetails);
+            return new ResponseEntity<>(updated, HttpStatus.OK);
         } catch (RuntimeException e) {
-            System.out.println("Error updating customer: " + e.getMessage());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // For validation errors
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
         }
     }
 
@@ -84,25 +72,4 @@ public class CustomerController {
     }
     
 
-   @PostMapping("/{customerId}/book/{serviceId}")
-    public ResponseEntity<Booking> bookService(
-        @PathVariable Long customerId,
-        @PathVariable Long serviceId) {
-    Booking booking = bookingService.createBooking(customerId, serviceId);
-    return new ResponseEntity<>(booking, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/{customerId}/review/{bookingId}")
-    public ResponseEntity<Review> writeReview(
-        @PathVariable Long customerId,
-        @PathVariable Long bookingId,
-        @RequestBody Review review) {
-    try{ Review savedReview = reviewService.createReview(customerId, bookingId, review.getComment(), review.getRating());
-    return new ResponseEntity<>(savedReview, HttpStatus.CREATED);
-    }catch(RuntimeException e){
-        System.out.println("Error creating review: " + e.getMessage());
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-    
-}
 }
