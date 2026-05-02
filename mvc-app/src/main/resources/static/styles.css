@@ -1,0 +1,309 @@
+body {
+    font-family:  Arial, Helvetica, sans-serif;
+    margin: 20px;
+    background-color: #f4f6f8;
+    color:#1f2a37;
+}
+
+h1 {
+    padding-top: 30px;
+    text-align: center;
+    color: #0f172a;
+}
+
+h2 {
+    color: #0f172a;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+h3 {
+    color: #0f172a;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+img {
+    width: 400px;
+    height: 300px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+hr {
+    border: 1px solid rgb(32, 32, 160);
+    margin: 40px 0;
+}
+
+p {
+    margin: 10px 0;
+}
+
+nav {
+    background: linear-gradient(90deg, #1f6f78, #3aafa9);
+    padding: 15px 20px;
+    display: flex;
+    border-radius: 20px;
+    justify-content: center;
+    gap: 25px;
+}
+
+nav a { 
+    color: rgb(209, 221, 226);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+
+}
+
+nav a:hover{
+    background-color:rgba(255, 255, 255, 0.2);
+}
+
+.card a{
+    color: rgb(255, 255, 255);
+    background-color: #3aafa9;
+    padding: 10px 14px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card a:hover {
+    background-color: #2b8c87;
+} 
+
+.intro {
+    position: relative;
+    text-align: center;
+    margin-top: 0;
+    padding: 120px 20px;
+    color: white;
+
+    background-image: url("images/cleaning.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.intro {
+    position: relative;
+    background-image: url("images/cleaning.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    padding: 120px 20px;
+    text-align: center;
+}   
+
+.intro-box {
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    color: #0f172a;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: rgb(192, 194, 194);
+    padding: 15px;
+    border-radius: 16px;
+    width: 260px;
+    box-shadow: 0 6px 20px rgba(116, 197, 235, 0.08);
+    transition: 0.3s ease;
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+
+}
+footer {
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 60px;
+    
+}
+blockquote {
+     max-width: 700px;
+    margin: 15px auto;
+    padding: 15px 20px;
+    font-style: italic;
+    background-color:#e0f2f1;
+   color: #0f172a;
+    border-radius: 10px;
+    padding: 15px;
+    border-left: 5px solid #3aafa9;
+
+}
+aside {
+    background: #f1f5f9;
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 5px solid #3aafa9;
+}
+.login-bg {
+    background-image: url("/images/login.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+
+.profile-bg {
+    background-image: url("/images/profile.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+form {
+    background: white;
+    backdrop-filter: blur(6px);
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+     margin: 40px auto;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #3aafa9;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #1f6f78;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+button:hover {
+    background: #14555a;
+}
+
+.status {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.booking-info p {
+    margin: 6px 0;  
+} 
+
+.booking-info a {
+     display: inline-block;
+     margin-top: 8px;
+    margin-right: 10px; 
+} 
+
+.booking-card a {
+    display: inline-block;
+    width: fit-content;
+    margin-top: 6px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    background: #3aafa9;
+    color: white;
+}
+
+.booking-card {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    background: rgb(255, 255, 255);
+    padding: 6%;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.booking-card img {
+     height: 180px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-top: 20px;
+    object-position: center;
+}
+
+.bookings-container {
+    max-width: 999px;
+    margin: 40px auto;
+    
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+} 
+.booking-card a:hover {
+    background: #043936;
+}
+
+h6 {
+    color: #000f1c87;
+    text-align: center;
+    margin-top: 10px;
+}
+.dashboard-summary {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.stats-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    flex: 1;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgb(186, 233, 226);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    text-align: center;
+}
