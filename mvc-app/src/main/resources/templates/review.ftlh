@@ -24,7 +24,7 @@
           <h6>Write Review for Booking ${booking.bookingId}</h6>
 
 
-          <form id="reviewForm" action="/reviews/save" method="post" onsubmit="submitReview(event)">
+        <form id="reviewForm" action="/reviews/save" method="post" onsubmit="submitReview(event)">
 
             <input type="hidden" name="bookingId" value="${booking.bookingId}"> 
 
@@ -42,30 +42,32 @@
              
             <button type="submit">Submit Review</button>
             
-           </form>
+        </form>
            
-             <h6>Thank you for helping us improve our services!</h6>
-       
-       
-       
-     <hr>
+        <h6>Thank you for helping us improve our services!</h6>
+
+            <hr>
+
             <h2>Customer Reviews</h2>
 
           
-<#if reviews?? && (reviews?size > 0)>
+            <#if reviews?? && reviews?size gt 0>
 
-    <#list reviews as review>
-        <blockquote>
-            <strong>${review.customer.name}</strong><br>
-            <p>Rating: ${review.rating} / 5</p>
-            <p>"${review.comment}"</p>
-        </blockquote>
-        <hr>
-    </#list>
+                <#list reviews as review>
+                    <blockquote>
+                        <p><strong>${review.customer.name}</strong></p>
+                                <p> ${review.rating}/5</p>
+                                <p>${review.comment}</p>
+                                <p><small>${review.createdAt}</small></p>
+                    </blockquote>
+                    <hr>
+                </#list>
 
-<#else>
-    <p>No reviews yet.</p>
-</#if>
+            <#else>
+                <p>No reviews yet for this service.</p>
+            </#if>
+
+
 
         <footer>
                 <p>CSC340 CleanSweep Project</p>

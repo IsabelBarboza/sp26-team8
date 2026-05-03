@@ -50,7 +50,7 @@
         </#if>
           </p>
 
-         <a href="/reviews/new?bookingId=${booking.bookingId}"> Leave / View Review</a>
+         <a href="/reviews/new?bookingId=${booking.bookingId}"> Leave Review</a>
           <br><br>
           <#if booking.status == "ACTIVE">
                         <a href="/booking/cancel?bookingId=${booking.bookingId}">Cancel</a>

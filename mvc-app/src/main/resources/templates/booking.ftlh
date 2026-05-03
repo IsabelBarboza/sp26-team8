@@ -22,11 +22,15 @@
         <section class="form">
             <h1> Booking Service</h1>
             <p>Schedule your cleaning service with ease.</p>
+
+            <#if error??>
+                <p style="color:red;">${error}</p>
+            </#if>
            
-            <#if serviceId??>
-            <form id="bookingForm" class="booking-form" action="/book" method="post" enctype="multipart/form-data">
-               </#if> 
-                <input type="hidden" name="serviceId" value="${serviceId}">
+            
+            <form  class="booking-form" action="/book" method="post" enctype="multipart/form-data">
+              
+                <input type="hidden" name="serviceId" value="${serviceId!}">
 
                 <label>Start Date:</label><br>
                 <input type="datetime-local" name="startDate" required><br><br>
@@ -43,6 +47,8 @@
                     
 
             </form>
+
+            
         </section>
         
         <footer>
