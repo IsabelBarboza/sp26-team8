@@ -44,5 +44,8 @@ public class ReviewService {
     public List<Review> getAllReviews() {
          return reviewRepository.findAllByOrderByReviewIdDesc();
         }
+    public List<Review> getReviewsByServiceId(Long serviceId) {
+        return reviewRepository.findByService_ServiceId(serviceId); 
+    }
 
 }

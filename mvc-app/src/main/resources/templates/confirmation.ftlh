@@ -32,7 +32,10 @@
 
         
         <br><br>
-         <h6><a href="/my-bookings">View My Bookings</a></h6>
+         <h6><a href="/my-bookings"  class="btn btn-primary"">View My Bookings</a></h6>
+
+
+      
           <br>
           <br>
         <footer>

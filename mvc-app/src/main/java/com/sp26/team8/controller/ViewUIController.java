@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sp26.team8.entity.Booking;
 import com.sp26.team8.entity.Booking.BookingStatus;
 import com.sp26.team8.entity.Customer;
+import com.sp26.team8.entity.Review;
 import com.sp26.team8.entity.User;
 import com.sp26.team8.service.BookingService;
 import com.sp26.team8.service.CleaningServiceService;
@@ -59,7 +60,10 @@ public class ViewUIController {
             }
 
     @GetMapping("/booking")
-    public String booking(@RequestParam Long serviceId, Model model) {
+    public String booking(@RequestParam(required = false) Long serviceId, Model model) {
+        if (serviceId == null) {
+        return "redirect:/providers";
+    }
         model.addAttribute("serviceId", serviceId);
         model.addAttribute("title", "Booking");
         return "booking";
@@ -77,6 +81,7 @@ public class ViewUIController {
                     LocalDateTime.parse(endDate), address);
             return "redirect:/confirmation?bookingId=" + booking.getBookingId();
         } catch (RuntimeException e) {
+            
             model.addAttribute("error", "Invalid booking data");
             model.addAttribute("title", "Booking");
             return "booking";
@@ -105,7 +110,7 @@ public String myBookings(HttpSession session, Model model) {
      model.addAttribute("bookings", bookingService.findByCustomer(customerId)
     );
         model.addAttribute("title", "My Bookings");
-    return "/my-bookings";
+    return "my-bookings";
 }
 
     @GetMapping("/confirmation")
@@ -124,7 +129,11 @@ public String myBookings(HttpSession session, Model model) {
     public String reviewForm(@RequestParam Long bookingId, Model model) {
         Booking booking = bookingService.findById(bookingId);
         model.addAttribute("booking", booking);
-        model.addAttribute("reviews", reviewService.getReviewsByBookingId(bookingId));
+         model.addAttribute("reviews",
+        reviewService.getReviewsByServiceId(
+            booking.getService().getServiceId()
+        )
+    );
         model.addAttribute("title", "Submit Review");
         return "review";
     }
@@ -140,6 +149,16 @@ public String myBookings(HttpSession session, Model model) {
         model.addAttribute("title", "Submit Review");
         return "redirect:/reviews/new?bookingId=" + bookingId;
     }
+    @GetMapping("/services/reviews")
+    public String serviceReviews(@RequestParam Long serviceId, Model model) {
+
+    List<Review> reviews = reviewService.getReviewsByServiceId(serviceId);
+
+    model.addAttribute("reviews", reviews);
+    model.addAttribute("serviceId", serviceId);
+
+    return "service-reviews";
+    }
 
     @GetMapping("/signup")
     public String showSignup(Model model) {
@@ -148,7 +167,7 @@ public String myBookings(HttpSession session, Model model) {
     }
 
     @PostMapping("/signup")
-    public String signup(@RequestParam String name, @RequestParam String email, @RequestParam String phone,
+    public String signup(@RequestParam String name, @RequestParam String email, @RequestParam String phoneNumber,
             @RequestParam String address, @RequestParam String password , Model model) {
     Customer existing = customerService.getCustomerByEmail(email);
             if (existing != null) {
@@ -164,7 +183,7 @@ public String myBookings(HttpSession session, Model model) {
      Customer customer = new Customer();
         customer.setName(name);
         customer.setEmail(email);
-        customer.setPhoneNumber(phone);
+        customer.setPhoneNumber(phoneNumber);
         customer.setAddress(address);
         customer.setPasswordHash(password);
         customer.setRole(User.UserRole.CUSTOMER);
