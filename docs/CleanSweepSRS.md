@@ -74,7 +74,7 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
   Scenario: Customer leaves a review.
     Given the customer has a completed cleaning service order.
     When the customer submit a review.
-    Then the system saves the review after services.
+    Then the system saves the review and associates it with the completed booking.
   ```
   
 
@@ -123,28 +123,45 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
 ---
 
 ## 3. Non‑Functional Requirements (make them measurable)
-- **Performance:** description 
-- **Availability/Reliability:** description
-- **Security/Privacy:** description
-- **Usability:** description
+- **Performance:** Service pages should load in under 1.5 seconds under normal load.
+- **Availability/Reliability:** The system should maintain 99% uptime during usage.
+- **Security/Privacy:** Users can only access their own bookings and cannot modify others' data.
+- **Usability:** A customer should be able to complete a booking in under 3 minutes.
 
 ---
 
 ## 4. Assumptions, Constraints, and Policies
-- list any rules, policies, assumptions, etc.
+- Assumptions:
+Users have access to a web browser.
+Providers(Services) are pre-registered or created through the system.
+Customers are authenticated using email and password.
+All booking data is stored in a persistent database.
 
+- Constraints:
+The system does not include payment processing.
+Only logged-in users can create, cancel, or review bookings.
+
+- Policies:
+A customer can only cancel their own bookings.
+Email must be unique for each user account.
+Password must meet minimum security requirements (length validation).
 ---
 
 ## 5. Milestones (course‑aligned)
-- **M2 Requirements** — this file + stories opened as issues. 
-- **M3 High‑fidelity prototype** — core customer/provider flows fully interactive. 
-- **M4 Design** — architecture, schema, API outline. 
-- **M5 Backend API** — key endpoints + tests. 
-- **M6 Increment** — ≥2 use cases end‑to‑end. 
-- **M7 Final** — complete system & documentation. 
+- **M2 Requirements** — SRS + use cases documented in GitHub issues. 
+- **M3 High‑fidelity prototype** — UI for customer booking flow and service browsing.
+- **M4 Design** — MVC architecture, database models, and system structure defined.
+- **M5 Backend API** — Controllers, services, and database integration completed.
+- **M6 Increment** — 
+  - Customer registration
+  - Service browsing
+  - Booking creation
+  - Review submission
+- **M7 Final** —  Fully functional CleanSweep system with documentation.
 
 ---
 
 ## 6. Change Management
-- Stories are living artifacts; changes are tracked via repository issues and linked pull requests.  
-- Major changes should update this SRS.
+- User stories are living documents and may evolve during development.
+- All changes are tracked using GitHub Issues and Pull Requests.
+- Major updates must be reflected in the SRS document.
