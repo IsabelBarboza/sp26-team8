@@ -2,7 +2,6 @@ package com.sp26.team8.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +38,16 @@ public class ViewUIController {
         public String home(HttpSession session, Model model) {
         Long userId = (Long) session.getAttribute("userId");
         List<Booking> bookings = userId != null
-                ? bookingService.getBookingsByUser(userId)
+                ? bookingService.getBookingsByUser(userId)  // load user bookings
                 : List.of();
                     long totalBookings = bookings.size();
 
             long activeBookings = bookings.stream()
-                    .filter(b -> b.getStatus() == BookingStatus.ACTIVE)
+                    .filter(b -> b.getStatus() == BookingStatus.ACTIVE) // count active
                     .count();
 
             long cancelledBookings = bookings.stream()
-                .filter(b -> b.getStatus() == BookingStatus.CANCELLED)
+                .filter(b -> b.getStatus() == BookingStatus.CANCELLED)// count cancelled
                 .count();
 
             model.addAttribute("bookings", bookings);
@@ -62,7 +61,7 @@ public class ViewUIController {
     @GetMapping("/booking")
     public String booking(@RequestParam(required = false) Long serviceId, Model model) {
         if (serviceId == null) {
-        return "redirect:/providers";
+        return "redirect:/providers";     // redirect if no service selected
     }
         model.addAttribute("serviceId", serviceId);
         model.addAttribute("title", "Booking");
@@ -76,7 +75,7 @@ public class ViewUIController {
         if (customerId == null) {
         return "redirect:/login";
     }
-        try {
+        try {// create booking
             Booking booking = bookingService.createBooking(customerId, serviceId, LocalDateTime.parse(startDate),
                     LocalDateTime.parse(endDate), address);
             return "redirect:/confirmation?bookingId=" + booking.getBookingId();
@@ -93,10 +92,11 @@ public String cancelBooking(@RequestParam Long bookingId, HttpSession session , 
 
     Long userId = (Long) session.getAttribute("userId");
     Booking booking = bookingService.findById(bookingId);
+     // security check
     if (booking == null || booking.getCustomer() == null || !booking.getCustomer().getUserId().equals(userId)) {
-        return "redirect:/";
+        return "redirect:/";  
     }
-    booking.setStatus(BookingStatus.CANCELLED);
+    booking.setStatus(BookingStatus.CANCELLED);  // update status
     bookingService.save(booking);
     return "redirect:/my-bookings";
 }
@@ -105,33 +105,38 @@ public String cancelBooking(@RequestParam Long bookingId, HttpSession session , 
 public String myBookings(HttpSession session, Model model) {
     Long customerId = (Long) session.getAttribute("userId");
     if (customerId == null) {
-        return "redirect:/login";
+        return "redirect:/login"; // must login
     }
-     model.addAttribute("bookings", bookingService.findByCustomer(customerId)
+     model.addAttribute("bookings", bookingService.findByCustomer(customerId) // load bookings
     );
         model.addAttribute("title", "My Bookings");
     return "my-bookings";
 }
 
     @GetMapping("/confirmation")
-    public String confirmation(@RequestParam Long bookingId, Model model) {
-        Booking booking = bookingService.findById(bookingId);
-         if (booking == null) {
-        model.addAttribute("errorMessage", "Booking not found");
-        return "error";
+    public String confirmation(@RequestParam Long bookingId, Model model, HttpSession session) {
+        
+        Long userId = (Long) session.getAttribute("userId");
+         if (userId == null) {
+        return "redirect:/login"; // require authentication
     }
-        model.addAttribute("booking", booking);
+        Booking booking = bookingService.findById(bookingId); // find booking
+        if (booking == null || booking.getCustomer() == null ||
+            !booking.getCustomer().getUserId().equals(userId)) {
+            return "redirect:/";
+        }
+        model.addAttribute("booking", booking); // send booking
         model.addAttribute("title", "Confirmation");
         return "confirmation";
     }
 
     @GetMapping("/reviews/new")
     public String reviewForm(@RequestParam Long bookingId, Model model) {
-        Booking booking = bookingService.findById(bookingId);
+        Booking booking = bookingService.findById(bookingId);  // get booking
         model.addAttribute("booking", booking);
          model.addAttribute("reviews",
         reviewService.getReviewsByServiceId(
-            booking.getService().getServiceId()
+            booking.getService().getServiceId() // load reviews
         )
     );
         model.addAttribute("title", "Submit Review");
@@ -169,7 +174,7 @@ public String myBookings(HttpSession session, Model model) {
     @PostMapping("/signup")
     public String signup(@RequestParam String name, @RequestParam String email, @RequestParam String phoneNumber,
             @RequestParam String address, @RequestParam String password , Model model) {
-    Customer existing = customerService.getCustomerByEmail(email);
+    Customer existing = customerService.getCustomerByEmail(email);  // check email
             if (existing != null) {
                 model.addAttribute("error", "Email already exists");
                 model.addAttribute("title", "Sign Up");
@@ -188,7 +193,7 @@ public String myBookings(HttpSession session, Model model) {
         customer.setPasswordHash(password);
         customer.setRole(User.UserRole.CUSTOMER);
         customer.setStatus(User.UserStatus.ACTIVE);
-        customerService.createCustomer(customer);
+        customerService.createCustomer(customer);   // save user
             model.addAttribute("title", "Sign Up");
         return "redirect:/login";
     }
@@ -202,7 +207,7 @@ public String myBookings(HttpSession session, Model model) {
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
         
-        Customer customer = customerService.getCustomerByEmail(email);
+        Customer customer = customerService.getCustomerByEmail(email);   // find user
         if (customer == null) {
             model.addAttribute("error", "Account does not exist");
             model.addAttribute("title", "Login");
@@ -214,7 +219,7 @@ public String myBookings(HttpSession session, Model model) {
             return "login";
         }
 
-        session.setAttribute("userId", customer.getUserId());
+        session.setAttribute("userId", customer.getUserId());  // save session
         
         return "redirect:/";
     }
@@ -224,7 +229,7 @@ public String myBookings(HttpSession session, Model model) {
     public String searchProviders(@RequestParam(required = false) String keyword,
             @RequestParam(required = false) BigDecimal maxPrice, Model model) {
         if ((keyword == null || keyword.isEmpty()) && maxPrice == null) {
-            model.addAttribute("services", serviceService.findAll());
+            model.addAttribute("services", serviceService.findAll()); // all services
         } else if (maxPrice != null) {
             model.addAttribute("services", serviceService.searchByMaxPrice(maxPrice));
         } else {
@@ -265,7 +270,7 @@ public String myBookings(HttpSession session, Model model) {
     }
 
     @GetMapping("/logout") public String logout(HttpSession session, Model model) { 
-        session.invalidate(); 
+        session.invalidate();  // clear session
         model.addAttribute("title", "Logout"); 
     return "redirect:/login"; 
 
