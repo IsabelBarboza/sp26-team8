@@ -7,20 +7,6 @@ CleanSweep is a Spring MVC web application that connects customers with cleaning
 Users can browse services, create bookings, manage reservations, and leave reviews.
 
 The system follows the MVC (Model-View-Controller) architecture and uses persistent database storage.
-
----
-
-## Features
-
-### Customer Features
-- User registration and login
-- Browse cleaning services
-- Filter services by keyword and price
-- Create bookings with date and address
-- View and cancel bookings
-- Submit reviews with rating and comments
-- Manage user profile
-
 ---
 
 ## Architecture
@@ -35,7 +21,7 @@ The system follows the MVC (Model-View-Controller) architecture and uses persist
   - booking.ftlh
   - login.ftlh
   - signup.ftlh
-  - providers.ftlh
+  - providers.ftlh   (Cleaning Services)
   - my-bookings.ftlh
   - profile.ftlh
   - review.ftlh
@@ -54,7 +40,8 @@ mvc-app/
 │ ├── controller/
 │ ├── entity/
 │ ├── service/
-  ├── repository/
+| ├── repository/
+|    
 │
 ├── src/main/resources/
 │ ├── templates/
@@ -65,15 +52,19 @@ mvc-app/
 │ ├── UML2.png
 │ ├── UseCases.png
 │ ├── CS Requirements Testing Plan.md
-│
+| ├── README.md
+│ ├── CleanSweepSRS.md
+| ├──CleanSweepDesign.md  
 ├── README.md
 
+
+---
 
 
 ## How to Run the Project (Maven)
 
 1. Clone repository
-git clone https://github.com/YourUsername/sp26-team8.git
+git clone https://github.com/IsabelBarboza/sp26-team8/tree/isabel-milestone6
 
 2. Go into project folder
 cd sp26-team8/mvc-app
@@ -89,17 +80,18 @@ http://localhost:8080/
 
 ---
 
-## Git Workflow
+## Features
 
-This project uses:
-- GitHub branches (milestones)
-- Issues for task tracking
-- Pull requests for integration
+### Customer Features
+- User registration and login
+- Browse cleaning services
+- Filter services by keyword and price
+- Create bookings with date and address
+- View and cancel bookings
+- Submit reviews with rating and comments
+- Manage user profile
 
-Branch used for final submission:
-isabel-milestone7
 
----
 
 ## Documentation
 
@@ -116,4 +108,4 @@ All documentation is located in the /docs folder:
 
 ## Final Notes
 
-This project implements all customer-side use cases, ensures persistent data storage, and demonstrates full MVC architecture compliance.
+This project implements all customer-side use cases, ensures persistent data storage, and MVC architecture compliance.
